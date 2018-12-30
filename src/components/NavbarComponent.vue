@@ -1,21 +1,30 @@
 <template>
     <nav :class="navState()">
-        <figure class="logo" v-if="showLogo()">Scatter</figure>
+        <figure class="logo" v-if="showLogo()">Chrove</figure>
         <section class="breadcrumb" v-else>
+<section v-if="bNoBackIcon()">
+</section>
+<section v-else>
             <figure class="icon" v-on:click="back">
                 <i class="fa fa-chevron-left"></i>
             </figure>
             <figure class="route">{{breadcrumb()}}</figure>
+</section>
         </section>
+<section v-if="bHideButtonSettings()">
+</section>
+<section v-else>
         <figure class="settings-button" v-on:click="toggleSettings">
             <i class="fa fa-gear"></i>
         </figure>
+</section>
     </nav>
 </template>
 
 <script>
     import { mapActions, mapGetters, mapState } from 'vuex'
     import {RouteNames} from '../vue/Routing'
+    import ChroVeMD from '../models/ChroVeMD'
 
     export default {
         computed: {
@@ -24,7 +33,32 @@
             ])
         },
         methods: {
-            back(){ this.$router.back() },
+            back(){
+                switch(this.$route.name){
+                    case RouteNames.PUI_ENTERCODE:
+                    	if(!ChroVeMD.own_svc(this))
+                    	{
+                    		this.$router.go(-2);
+                    		return;
+                    	}
+                    	break;
+                    case RouteNames.PUI_SHOWPRICE:
+                    	//if(!gDbgLocalSvcInited)
+                    	if(ChroVeMD.bIsRefreshSingleURL)
+                    	{
+                    		this.$router.go(-3);
+                    		return;
+                    	}
+                    	break;
+                    case RouteNames.PUI_ORDERTHIS:
+                    case RouteNames.PUI_ORDEROTHER:
+                    	{
+                    		this.$router.go(-2);
+                    		return;
+                    	}
+                    	break;
+                    }
+            this.$router.back() },
             showLogo(){
                 switch(this.$route.name){
                     case RouteNames.ENTRY:
@@ -64,8 +98,44 @@
                     case RouteNames.LANGUAGE: return 'Language';
                     case RouteNames.KEYPAIRS: return 'Key Pair';
                     case RouteNames.KEYS: return 'Key Pairs';
+                    
+                    case RouteNames.PAYGO: return 'PayGoService';
+                    
+                    case RouteNames.PUI_ENTERCODE: 
+                    case RouteNames.PUI_SHOWPRICE: 
+                    case RouteNames.PUI_PAYWAY: 
+                    
+			case RouteNames.PUI_ORDEROTHER :
+			case RouteNames.PUI_ORDERTHIS  :
+			case RouteNames.PUI_PAIDLOADING:
+			case RouteNames.PUI_SERVICELIST:
+			case RouteNames.PUI_USEOTHER   :
+			case RouteNames.PUI_USETHIS    :
+
+                    	return '';
                 }
                 return 'Undefined'
+            },
+            bNoBackIcon()
+            {
+            	if(this.$route.name==RouteNames.PUI_PAIDLOADING)return true;
+            	else return false;
+            },
+            bHideButtonSettings(){
+                switch(this.$route.name){
+                    case RouteNames.PUI_ENTERCODE: 
+                    case RouteNames.PUI_SHOWPRICE: 
+                    case RouteNames.PUI_PAYWAY: 
+                    
+			case RouteNames.PUI_ORDEROTHER :
+			case RouteNames.PUI_ORDERTHIS  :
+			case RouteNames.PUI_PAIDLOADING:
+			case RouteNames.PUI_SERVICELIST:
+			case RouteNames.PUI_USEOTHER   :
+			case RouteNames.PUI_USETHIS    :
+                    	return true;
+                }
+                return false;
             },
             toggleSettings(){
                 if(this.$route.name === RouteNames.SETTINGS) this.back();

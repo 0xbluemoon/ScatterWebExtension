@@ -46,11 +46,11 @@ export default {
     [KEYS.BUTTON_SetAsDefaultLocation]:'Establecer Como Ubicación Predeterminada',
     [KEYS.BUTTON_RemoveLocation]:'Eliminar Ubicación',
     [KEYS.BUTTON_ChangePassword]:'Cambiar Contraseña',
-    [KEYS.BUTTON_DestroyScatter]:'Borrar Scatter',
-    [KEYS.BUTTON_CreateNewScatter]:'Crear Nuevo Scatter',
+    [KEYS.BUTTON_DestroyScatter]:'Borrar Chrove',
+    [KEYS.BUTTON_CreateNewScatter]:'Crear Nuevo Chrove',
     [KEYS.BUTTON_LoadFromBackup]:'Cargar Desde Respaldo',
     [KEYS.BUTTON_Unlock]:'Desbloquear',
-    [KEYS.BUTTON_ExportScatter]:'Exportar Scatter',
+    [KEYS.BUTTON_ExportScatter]:'Exportar Chrove',
     [KEYS.BUTTON_GenerateKeyPair]:'Generar Par de Llaves',
     [KEYS.BUTTON_Validate]:'Validar',
     [KEYS.BUTTON_Copy]:'Copiar',
@@ -288,7 +288,7 @@ export default {
     ],
     //2
     [KEYS.PROMPT_DestroyingScatter]:[
-        'Borrando Scatter',
+        'Borrando Chrove',
 
         'Esta es tu última oportunidad para verificar tus respaldos.'
     ],

@@ -1,5 +1,5 @@
 <template>
-    <section class="select" :class="{'open':open, 'seventy':seventy, 'disabled':disabled}">
+    <section class="select" :class="{'open':open, 'half':half, 'second-half':secondHalf, 'seventy':seventy, 'disabled':disabled}">
         <figure class="arrow">
             <i class="fa fa-chevron-down"></i>
         </figure>
@@ -41,7 +41,7 @@
                 this.$emit('changed', this.selectedOption)
             }
         },
-        props:['placeholder', 'options', 'selected', 'prop', 'parser', 'seventy', 'disabled'],
+        props:['placeholder', 'options', 'selected', 'prop', 'parser', 'half', 'secondHalf', 'seventy', 'disabled'],
         watch:{
             input(){ this.emit(); },
             text(){ this.input = this.text; },
@@ -66,6 +66,17 @@
 
         &.disabled {
             background: #f5f5f5;
+        }
+
+        &.half, &.second-half {
+            width:calc(50% - 18px);
+            display:inline-block;
+            font-size:14px;
+            vertical-align: top;
+        }
+
+        &.second-half {
+            margin-left:6px;
         }
 
         &.seventy {

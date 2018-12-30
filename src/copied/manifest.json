@@ -1,18 +1,31 @@
 {
   "manifest_version": 2,
-  "name": "Scatter",
-  "description": "Decentralized signature, identity and authentication system.",
-  "version": "6.1.10",
+  "name": "Chrove",
+  "description": "Enjoy your PayGo service.",
+  "version": "6.6.17",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  
+  "icons": {
+	"16": "logo_carrot16-16.png",
+    "128": "logo_carrot128-128.png"
+ },
+
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "logo_carrot128-128.png",
     "default_popup": "index.html"
   },
+
+    "offline_enabled": true,
+
   "permissions": [
     "storage",
     "unlimitedStorage",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+        "proxy",
+        "<all_urls>",
+        "webRequest",
+        "webRequestBlocking"
   ],
   "content_scripts": [
     {

@@ -3,15 +3,15 @@
 
         <section v-if="step == 0">
             <section class="white-bg">
-                <figure class="title">Welcome to Scatter!</figure>
+                <figure class="title">Welcome to Chrove!</figure>
                 <figure class="breaker"></figure>
                 <figure class="description">
-                    The Scatter team holds no liability towards your digital assets. It is your responsibility to constantly make sure your
-                    computer is free of malware. We have taken every measure in our capabilities to ensure that Scatter is safe to use
+                    The Chrove team holds no liability towards your digital assets. It is your responsibility to constantly make sure your
+                    computer is free of malware. We have taken every measure in our capabilities to ensure that Chrove is safe to use
                     as intended however your computer itself is your worst enemy and should be treated as such.
                     <br><br>
-                    By using Scatter you are relinquishing any ability to take legal actions against the Scatter team
-                    and recognize yourself as the sole legal owner of your own Scatter instance, your keys, and your data.
+                    By using Chrove you are relinquishing any ability to take legal actions against the Chrove team
+                    and recognize yourself as the sole legal owner of your own Chrove instance, your keys, and your data.
                 </figure>
             </section>
             <section class="p20">
@@ -25,7 +25,7 @@
                 <figure class="title">Import Key Pair</figure>
                 <figure class="breaker"></figure>
                 <figure class="description">
-                    Scatter supports multiple blockchains. When you enter your Key Pair we will determine which
+                    Chrove supports multiple blockchains. When you enter your Key Pair we will determine which
                     one you are using and set up your Identity for you.
                 </figure>
             </section>
@@ -45,12 +45,12 @@
                 <figure class="title">That's it!</figure>
                 <figure class="breaker"></figure>
                 <figure class="description">
-                    You now have a Scatter Identity with an {{keypair.blockchain.toUpperCase()}} account linked to it.
+                    You now have a Chrove Identity with an {{keypair.blockchain.toUpperCase()}} account linked to it.
                     <br><br>
                     You can go to your Identity and fill out any extra fields applications might want from you, but none of the fields in your
                     Identity are mandatory.
                     <br><br>
-                    Enjoy using Scatter.
+                    Enjoy using Chrove.
                 </figure>
             </section>
             <section class="p20">

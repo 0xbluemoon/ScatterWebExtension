@@ -9,6 +9,7 @@ import Error from './models/errors/Error'
 import {apis} from './util/BrowserApis';
 import Hasher from './util/Hasher'
 import {strippedHost} from './util/GenericTools'
+import ChroVeMD from './models/ChroVeMD'
 
 // The stream that connects between the content script
 // and the website

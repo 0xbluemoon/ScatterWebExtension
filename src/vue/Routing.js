@@ -19,6 +19,17 @@ import KeyPairView from '../views/KeyPairView.vue'
 import LoadFromBackup from '../views/LoadFromBackup.vue'
 import KeyPairsView from '../views/KeyPairsView.vue'
 
+//import PayGoView from '../views/PayGoView.vue'
+import PayGo_EnterCodeView from '../views/PayGo_EnterCodeView.vue'
+import PayGo_OrderOtherView from '../views/PayGo_OrderOtherView.vue'
+import PayGo_OrderThisView from '../views/PayGo_OrderThisView.vue'
+import PayGo_PaidLoadingView from '../views/PayGo_PaidLoadingView.vue'
+import PayGo_PayWayView from '../views/PayGo_PayWayView.vue'
+import PayGo_ServiceListView from '../views/PayGo_ServiceListView.vue'
+import PayGo_ShowPriceView from '../views/PayGo_ShowPriceView.vue'
+import PayGo_UseOtherView from '../views/PayGo_UseOtherView.vue'
+import PayGo_UseThisView from '../views/PayGo_UseThisView.vue'
+
 import * as PromptTypes from '../models/prompts/PromptTypes'
 import RequestIdentityPrompt from '../prompts/RequestIdentityPrompt.vue'
 import RequestSignaturePrompt from '../prompts/RequestSignaturePrompt.vue'
@@ -53,6 +64,19 @@ export const RouteNames = {
     AUTO_LOCK:'autoLock',
     LANGUAGE:'language',
     KEYPAIRS:'keypairs',
+    
+    PAYGO:'paygo',
+    
+    PUI_ENTERCODE:'pui_entercode',
+    PUI_SHOWPRICE:'pui_showprice',
+    PUI_PAYWAY:'pui_payway',
+    
+	PUI_ORDEROTHER:'pui_orderother',
+	PUI_ORDERTHIS:'pui_orderthis',
+	PUI_PAIDLOADING:'pui_paidloading',
+	PUI_SERVICELIST:'pui_servicelist',
+	PUI_USEOTHER:'pui_useother',
+	PUI_USETHIS:'pui_usethis',
 
     PROMPT_REQUEST_IDENTITY:`${promptPrefix}${PromptTypes.REQUEST_IDENTITY}`,
     PROMPT_REQUEST_SIGNATURE:`${promptPrefix}${PromptTypes.REQUEST_SIGNATURE}`,
@@ -87,6 +111,19 @@ const RouteViews = {
     [RouteNames.LANGUAGE]:LanguageView,
     [RouteNames.KEYPAIRS]:KeyPairView,
 
+//    [RouteNames.PAYGO]:PayGoView,
+
+    [RouteNames.PUI_ENTERCODE]:PayGo_EnterCodeView,
+    [RouteNames.PUI_SHOWPRICE]:PayGo_ShowPriceView,
+    [RouteNames.PUI_PAYWAY]:PayGo_PayWayView,
+
+	[RouteNames.PUI_ORDEROTHER ]:PayGo_OrderOtherView,
+	[RouteNames.PUI_ORDERTHIS  ]:PayGo_OrderThisView,
+	[RouteNames.PUI_PAIDLOADING]:PayGo_PaidLoadingView,
+	[RouteNames.PUI_SERVICELIST]:PayGo_ServiceListView,
+	[RouteNames.PUI_USEOTHER   ]:PayGo_UseOtherView,
+	[RouteNames.PUI_USETHIS    ]:PayGo_UseThisView,
+
     [RouteNames.PROMPT_REQUEST_IDENTITY]:RequestIdentityPrompt,
     [RouteNames.PROMPT_REQUEST_SIGNATURE]:RequestSignaturePrompt,
     [RouteNames.PROMPT_REQUEST_ARBITRARY_SIGNATURE]:RequestArbitrarySignaturePrompt,
@@ -119,6 +156,19 @@ export const RouteDepth = {
     [RouteNames.LANGUAGE]:101,
     [RouteNames.BACKUP]:101,
     [RouteNames.DESTROY]:101,
+
+    [RouteNames.PAYGO]:1,
+
+    [RouteNames.PUI_ENTERCODE]:11,
+    [RouteNames.PUI_SHOWPRICE]:13,
+    [RouteNames.PUI_PAYWAY]:14,
+
+	[RouteNames.PUI_ORDEROTHER ]:15,
+	[RouteNames.PUI_ORDERTHIS  ]:15,
+	[RouteNames.PUI_PAIDLOADING]:16,
+	[RouteNames.PUI_SERVICELIST]:1,
+	[RouteNames.PUI_USEOTHER   ]:14,
+	[RouteNames.PUI_USETHIS    ]:12,
 };
 
 export class Routing {

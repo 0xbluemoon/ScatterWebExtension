@@ -19,3 +19,6 @@ export const AUTHENTICATE = 'authenticate';
 
 export const SET_PROMPT = 'setPrompt';
 export const GET_PROMPT = 'getPrompt';
+
+export const ENSURE_AUTHREQSET = 'authReqSet';
+export const CLEAR_AUTHREQSET = 'authReqClear';

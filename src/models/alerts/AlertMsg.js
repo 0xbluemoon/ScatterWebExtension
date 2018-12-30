@@ -136,7 +136,7 @@ export default class AlertMsg {
 
     static DestroyingScatter(){
         return new AlertMsg(AlertTypes.Prompt,
-            'Destroying Scatter',
+            'Destroying Chrove',
             'This is your last chance to double check your backups.'
         );
     }

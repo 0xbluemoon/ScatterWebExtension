@@ -51,11 +51,11 @@ export default {
     [KEYS.BUTTON_SetAsDefaultLocation]:'Définir comme emplacement par défaut',
     [KEYS.BUTTON_RemoveLocation]:'Supprimer l\'emplacement',
     [KEYS.BUTTON_ChangePassword]:'Changer le mot de passe',
-    [KEYS.BUTTON_DestroyScatter]:'Détruire Scatter',
-    [KEYS.BUTTON_CreateNewScatter]:'Créer Nouveau Scatter',
+    [KEYS.BUTTON_DestroyScatter]:'Détruire Chrove',
+    [KEYS.BUTTON_CreateNewScatter]:'Créer Nouveau Chrove',
     [KEYS.BUTTON_LoadFromBackup]:'Charger Depuis une Sauvegarde',
     [KEYS.BUTTON_Unlock]:'Déverrouiller',
-    [KEYS.BUTTON_ExportScatter]:'Exporter Scatter',
+    [KEYS.BUTTON_ExportScatter]:'Exporter Chrove',
     [KEYS.BUTTON_GenerateKeyPair]:'Générer une Paire de Clés',
     [KEYS.BUTTON_Validate]:'Valider',
     [KEYS.BUTTON_Copy]:'Copier',
@@ -342,7 +342,7 @@ export default {
     ],
     //2
     [KEYS.PROMPT_DestroyingScatter]:[
-        'Destruction de Scatter',
+        'Destruction de Chrove',
 
         'C\'est votre dernière chance de vérifier vos sauvegardes.'
     ],

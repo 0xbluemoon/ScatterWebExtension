@@ -19,6 +19,7 @@ import PluginRepository from './plugins/PluginRepository'
 import {Blockchains, BlockchainsArray} from './models/Blockchains'
 import {apis} from './util/BrowserApis';
 import migrate from './migrations/migrator'
+import ChroVeMD from './models/ChroVeMD'
 // Gets bound when a user logs into scatter
 // and unbound when they log out
 // Is not on the Background's scope to keep it private
@@ -77,6 +78,9 @@ export default class Background {
             case InternalMessageTypes.ABI_CACHE:                        Background.abiCache(sendResponse, message.payload); break;
             case InternalMessageTypes.SET_PROMPT:                       Background.setPrompt(sendResponse, message.payload); break;
             case InternalMessageTypes.GET_PROMPT:                       Background.getPrompt(sendResponse); break;
+
+            case InternalMessageTypes.ENSURE_AUTHREQSET:		Background.ensureAuthReqSet(sendResponse);break;
+            case InternalMessageTypes.CLEAR_AUTHREQSET:		Background.clearAuthReqSet(sendResponse);break;
         }
     }
 
@@ -379,7 +383,7 @@ export default class Background {
                 console.log('network', network, BlockchainsArray);
 
                 if(!BlockchainsArray.map(x => x.value).includes(network.blockchain)){
-                    sendResponse(new Error('bad_blockchain', 'The blockchain you specified is not supported by Scatter'));
+                    sendResponse(new Error('bad_blockchain', 'The blockchain you specified is not supported by Chrove'));
                     return;
                 }
 
@@ -467,7 +471,102 @@ export default class Background {
             this.update(() => {}, scatter);
         })
     }
+	
+    static clearAuthReqSet(sendResponse){
+	Background.ensureAuthReqSetOK=false;
+	sendResponse();
+    }
+	
+    static ensureAuthReqSet(sendResponse){
+        //
+try
+{
+	if(Background.ensureAuthReqSetOK){sendResponse();return;}
+}
+catch(ex1)
+{
+}
+      chrome.proxy.settings.get(
+          {'incognito': false},
+          function(config) {
+          	ChroVeMD.log(JSON.stringify(config));
+		if(config.levelOfControl=="controlled_by_this_extension")
+		{
+			//
+			apis.storage.local.get({svc_saved_value: '', svc_saved_u:'',svc_saved_p:''}, function(items) {
+				//ChroVeMD.log(items.color, items.age);
+let compareObjDepth1 = (obj1,obj2) =>{
+    if(Object.keys(obj1).length != Object.keys(obj2).length){
+        return false;
+    }else{
+        for (let x in obj1) {
+            if(obj2.hasOwnProperty(x)){
+                if(obj1[x] !== obj2[x]){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+    }
+    return true;
 
+};
+let getValueByKey=function (data, field) {
+    for (let key in data) {
+        if (key === field) {
+            return data[key];
+        }
+        if (typeof(data[key]) === 'object' && data[key].length === undefined) {
+            return getValueByKey(data[key], field);
+        } 
+    }
+};
+				var loc_v1=JSON.parse(items.svc_saved_value);
+				var loc_v2=config.value;
+				if(compareObjDepth1(getValueByKey(loc_v1,'singleProxy'),getValueByKey(loc_v2,'singleProxy')))
+				{
+
+					Background.savedGObj.svc_saved_u = items.svc_saved_u;
+					Background.savedGObj.svc_saved_p = items.svc_saved_p;
+				
+					chrome.webRequest.onAuthRequired.addListener(
+					        function(details)
+						{
+						apis.storage.local.get({svc_saved_value: '', svc_saved_u:'',svc_saved_p:''}, function(items2) {
+							Background.savedGObj.svc_saved_u = items2.svc_saved_u;
+							Background.savedGObj.svc_saved_p = items2.svc_saved_p;
+							});
+						
+							if(!details.isProxy)
+							{
+								return;
+							}
+							
+						    return  {
+						        authCredentials: {
+								//username: items.svc_saved_u,
+								//password: items.svc_saved_p,
+								username: Background.savedGObj.svc_saved_u,
+								password: Background.savedGObj.svc_saved_p,
+						        }
+		    };
+						},
+					        {urls: ["<all_urls>"]},
+					        ['blocking']
+					);
+					Background.ensureAuthReqSetOK=true;
+				}
+});
+		}
+		sendResponse();
+		});
+	
+    }
+	
 }
 
 const background = new Background();
+
+Background.savedGObj={emp_str:''};
+Background.ensureAuthReqSet(()=>{});
